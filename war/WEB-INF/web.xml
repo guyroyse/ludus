@@ -12,10 +12,10 @@
 			require 'sinatra'
 			
 			set :environment, :production
-			set :app_file, 'hello.rb'
+			set :app_file, 'app.rb'
 			disable :run
 			
-			require 'hello'
+			require 'app'
 			
 			run Sinatra::Application
 		</param-value>
@@ -34,5 +34,16 @@
 	<listener>
 		<listener-class>org.jruby.rack.RackServletContextListener</listener-class>
 	</listener>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>The App</web-resource-name>
+			<url-pattern>/app/*</url-pattern>
+			<url-pattern>/api/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>*</role-name>
+		</auth-constraint>
+	</security-constraint>
 
 </web-app>
