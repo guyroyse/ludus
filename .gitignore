@@ -1,0 +1,5 @@
+build.properties
+.project
+ludus-gems
+war/WEB-INF/classes
+war/WEB-INF/lib
