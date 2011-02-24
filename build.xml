@@ -2,7 +2,8 @@
     <property file="build.properties" />
     <property name="project.name" value="ludus" />
     <property name="project.gems" value="${project.name}-gems" />
-    <property name="project.src" value="src" />
+    <property name="project.src.ruby" value="src/ruby" />
+    <property name="project.src.java" value="src/java" />
     <property name="project.lib" value="lib" />
     <property name="web.inf" value="war/WEB-INF" />
     <property name="web.inf.lib" value="${web.inf}/lib" />
@@ -10,12 +11,8 @@
     <property name="project.gems.jar" value="${web.inf.lib}/${project.gems}.jar" />
     <import file="${appengine.home}/config/user/ant-macros.xml" />
     <path id="project.classpath">
-        <pathelement path="${web.inf.classes}" />
         <fileset dir="${web.inf.lib}">
             <include name="**/*.jar" />
-        </fileset>
-        <fileset dir="${appengine.home}/lib">
-            <include name="shared/**/*.jar" />
         </fileset>
     </path>
     <target name="help">
@@ -58,7 +55,7 @@
             <filelist dir="${project.lib}">
                 <file name="jruby-core-1.5.6.jar" />
                 <file name="jruby-stdlib-1.5.6.jar" />
-                <file name="jruby-rack-1.0.6.jar" />
+                <file name="jruby-rack-1.0.5.jar" />
             </filelist>
         </copy>
         <echo>Installing GAE JARs...</echo>
@@ -82,14 +79,18 @@
         <exec executable="gem" failonerror="true" resolveexecutable="true">
             <arg line="install tilt -v '= 1.2.2' -i ${project.gems} --no-rdoc --no-ri --ignore-dependencies" />
         </exec>
+        <exec executable="gem" failonerror="true" resolveexecutable="true">
+            <arg line="install jruby-rack -v '= 1.0.5' -i ${project.gems} --no-rdoc --no-ri --ignore-dependencies" />
+        </exec>
         <jar destfile="${project.gems.jar}" basedir="${project.gems}" />
     </target>
     <target name="create-web-inf-lib">
         <mkdir dir="${web.inf.lib}" />
     </target>
     <target name="compile" depends="create-web-inf-classes">
-        <copy todir="${web.inf.classes}">
-            <fileset dir="${project.src}">
+        <javac srcdir="${project.src.java}" destdir="${web.inf.classes}" classpathref="project.classpath" source="1.6" />
+    	<copy todir="${web.inf.classes}">
+            <fileset dir="${project.src.ruby}">
                 <include name="**/*" />
             </fileset>
         </copy>

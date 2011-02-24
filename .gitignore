@@ -3,3 +3,5 @@ build.properties
 ludus-gems
 war/WEB-INF/classes
 war/WEB-INF/lib
+bin
+.classpath

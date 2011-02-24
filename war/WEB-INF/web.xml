@@ -13,6 +13,7 @@
 			
 			set :environment, :production
 			set :app_file, 'app.rb'
+			set :public, 'pub'
 			disable :run
 			
 			require 'app'
@@ -28,7 +29,7 @@
 	
 	<filter-mapping>
 		<filter-name>RackFilter</filter-name>
- 		<url-pattern>/*</url-pattern>
+ 		<url-pattern>*</url-pattern>
 	</filter-mapping>
 	
 	<listener>
