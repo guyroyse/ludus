@@ -2,9 +2,9 @@ require 'rubygems'
 require 'sinatra'
 require 'java'
 
-java_import com.google.appengine.api.users
+java_import com.google.appengine.api.users.UserServiceFactory
 
-get '/hello' do
+get '/app/hello' do
   "Hello World"
 end
 
