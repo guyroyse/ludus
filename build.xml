@@ -82,6 +82,9 @@
         <exec executable="gem" failonerror="true" resolveexecutable="true">
             <arg line="install jruby-rack -v '= 1.0.5' -i ${project.gems} --no-rdoc --no-ri --ignore-dependencies" />
         </exec>
+        <exec executable="gem" failonerror="true" resolveexecutable="true">
+            <arg line="install json_pure -v '= 1.5.1' -i ${project.gems} --no-rdoc --no-ri --ignore-dependencies" />
+        </exec>
         <jar destfile="${project.gems.jar}" basedir="${project.gems}" />
     </target>
     <target name="create-web-inf-lib">

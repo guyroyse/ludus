@@ -13,7 +13,6 @@
 			
 			set :environment, :production
 			set :app_file, 'app.rb'
-			set :public, 'pub'
 			disable :run
 			
 			require 'app'
