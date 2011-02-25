@@ -1,0 +1,43 @@
+body {
+	font-family: 'Coming Soon', arial, serif;
+	font-size: 20px;
+	background-color: azure;
+	color: charcoal;
+}
+
+#page {
+	position: absolute;
+	left: 50%;
+	width: 1000px;
+	margin-left: -500px;
+	margin-top: 50px;
+}
+
+#banner {
+	width: 500px;
+	padding-left: 250px;
+	padding-bottom: 50px;
+}
+
+#logo {
+	font-family: 'Slackey', arial, serif;
+	font-size: 40px;
+}
+
+#tagline {
+	text-align: right;
+}
+
+h1 {
+	font-family: 'Slackey', arial, serif;
+	font-size: 20px;
+}
+
+a {
+	text-decoration:none;
+	color: blue;
+}
+
+a:hover {
+	color: red;
+}	
