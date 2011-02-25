@@ -16,7 +16,7 @@ body {
 #banner {
 	width: 500px;
 	padding-left: 250px;
-	padding-bottom: 50px;
+	padding-bottom: 30px;
 }
 
 #logo {
@@ -41,3 +41,22 @@ a {
 a:hover {
 	color: red;
 }	
+
+#navbar {
+	text-align: center;
+	letter-spacing: 5px;
+	font-weight: bold;
+	width: 100%;
+	padding-bottom: 30px;
+}
+
+#navbar li {
+	display: inline;
+	margin-right: 20px;
+	color: blue;
+}
+
+#navbar li:hover {
+	color: red;
+	cursor: pointer;
+}
