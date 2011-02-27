@@ -1,8 +1,8 @@
 body {
 	font-family: 'Coming Soon', arial, serif;
 	font-size: 20px;
-	background-color: azure;
-	color: charcoal;
+	background-color: #ffffff;
+	color: #222222;
 }
 
 #page {
@@ -11,6 +11,16 @@ body {
 	width: 1000px;
 	margin-left: -500px;
 	margin-top: 50px;
+}
+
+#left-col {
+	width: 480px;
+	float: left;
+}
+
+#right-col {
+	width: 480px;
+	float: right;
 }
 
 #banner {
@@ -42,21 +52,15 @@ a:hover {
 	color: red;
 }	
 
-#navbar {
-	text-align: center;
-	letter-spacing: 5px;
-	font-weight: bold;
-	width: 100%;
-	padding-bottom: 30px;
+#openid-providers {
+	list-style-type: none;
+	width: 300px;
+	padding-left: 80px;
+	padding-top: 20px;
 }
 
-#navbar li {
-	display: inline;
-	margin-right: 20px;
-	color: blue;
-}
-
-#navbar li:hover {
-	color: red;
-	cursor: pointer;
+#openid-providers li {
+	width: 140px;
+	float: left;
+	height: 60px;
 }

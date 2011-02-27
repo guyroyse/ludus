@@ -40,10 +40,15 @@
 			<web-resource-name>The App</web-resource-name>
 			<url-pattern>/app/*</url-pattern>
 			<url-pattern>/api/*</url-pattern>
+			<url-pattern>/ludus.html</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>*</role-name>
 		</auth-constraint>
 	</security-constraint>
+	
+	<welcome-file-list>
+		<welcome-file>home.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>
