@@ -29,9 +29,11 @@ end
 get '/public/api/current-user' do
   user = LudusUserService.current_user
   content_type "application/json"
-  {
-    :loggedIn => !user.nil?
-  }.to_json
+  if (user.nil?)
+    return { :loggedIn => false }.to_json
+  else
+    return { :loggedIn => true, :name => user.nickname }.to_json
+  end
 end
 
 get '/api/logout-url' do

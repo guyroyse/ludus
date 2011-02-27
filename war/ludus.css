@@ -64,3 +64,16 @@ a:hover {
 	float: left;
 	height: 60px;
 }
+
+.button {
+	float: left;
+	border-size: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: azure;
+	padding: 2px;
+	width: 100px;
+	text-align: center;
+	font-family: arial;
+	margin-right: 5px;
+}
