@@ -13,14 +13,14 @@ public class LudusUserService {
 		return userService.getCurrentUser();
 	}
 	
-	public static String createOpenIdLoginUrl(String destinationUrl, String openIdUrl) {
+	public static String createLoginUrl(String returnUrl, String openIdUrl) {
 		UserService userService = UserServiceFactory.getUserService();
-		return userService.createLoginURL(destinationUrl, null, openIdUrl, new HashSet<String>());
+		return userService.createLoginURL(returnUrl, null, openIdUrl, new HashSet<String>());
 	}
 	
-	public static String createLogoutUrl(String destinationUrl) {
+	public static String createLogoutUrl(String returnUrl) {
 		UserService userService = UserServiceFactory.getUserService();
-		return userService.createLogoutURL(destinationUrl);
+		return userService.createLogoutURL(returnUrl);
 	}
 	
 }
