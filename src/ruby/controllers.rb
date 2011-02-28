@@ -4,7 +4,8 @@ require 'model'
 module LoginUrlController
   def LoginUrlController.execute(requested_url, requested_path)
     retval = []
-    providers = OpenIdProviders.new(requested_url.sub(/#{Regexp.escape(requested_path)}$/, '') + '/ludus.html') 
+    return_url = LudusUrl.new(requested_url, requested_path)
+    providers = OpenIdProviders.new(return_url.url) 
     providers.each do |provider|
       retval << provider.to_hash
     end
