@@ -1,5 +1,5 @@
 Before do
-  @browser = Browser.new
+  @browser = Browser.new(:resynchronize => true)
 end
 
 After do

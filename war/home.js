@@ -25,7 +25,7 @@ $(function() {
 			},
 			addLoginProvider : function(url, image, name) {
 				var li = $('<li/>');
-				var a = $('<a/>)').attr('href', url);
+				var a = $('<a/>)').attr('href', url).attr('id', name);
 				var img = $('<img/>').attr('src', image).attr('alt', name);
 				a.append(img);
 				li.append(a);

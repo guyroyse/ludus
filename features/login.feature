@@ -1,40 +1,40 @@
 Feature: Login
 
-  Scenario: User sees five OpenID providers on the welcome page
-  	Given I am on the welcome page
-  	  And I am signed out 
-    Then I should see the sign in panel
-      And I should see a sign in logo for Google
-      And I should see a sign in logo for Yahoo!
-      And I should see a sign in logo for MySpace
-      And I should see a sign in logo for AOL
-      And I should see a sign in logo for MyOpenID
+  Scenario: User sees correct OpenID providers on the Welcome Page
+    Given I am signed out
+  	  And I have navigated to the Welcome Page 
+    Then I should see the Sign In Panel
+      And I should see a sign in logo for the following providers:
+        | Name     | Image              |
+        | Google   | google.png         |
+        | Yahoo!   | yahoo.png          |
+        | MySpace  | logo_muspace_s.gif |
+        | AOL      | aol.png            |
+        | MyOpenID | myopenid.png       |
 
   Scenario: User can login using OpenID
-    Given I am on the welcome page
-  	  And I am signed out 
-    When I click the Google logo
-    Then I should see the login form
-    When I enter a username of test@example.com
+    Given I am signed out
+  	  And I have navigated to the Welcome Page
+    When I click the sign in logo for Google
+    Then I should see the Login Page
+    When I enter an email of test@hardboiledgeek.com
       And I click Log In
-    Then I should see the lobby page
+    Then I should see the Lobby Page
     
-  Scenario: Logged in user on welcome page see welcome back panel
-    Given I am signed on
-    When I navigate to the welcome page
-    Then I should see the welcome back panel
-      And I should see the enter button  
-      And I should see the sign out button
+  Scenario: Logged in user on Welcome Page see Welcome Back Panel
+    Given I am signed in
+  	  And I have navigated to the Welcome Page 
+    Then I should see the Welcome Back Panel
       
-  Scenario: Logged in user on welcome page can sign out
-  	Given I am on the welcome page
-  	  And I am signed in
-  	When I click sign out
-    Then I should see the sign in panel
+  Scenario: Logged in user on Welcome Page can sign out
+    Given I am signed in
+  	  And I have navigated to the Welcome Page 
+  	When I click Sign Out
+    Then I should see the Sign In Panel
 
-  Scenario: Logged in user on welcome page can enter site
-  	Given I am on the welcome page
-  	  And I am signed in
-  	When I click enter
-    Then I should see the lobby page
+  Scenario: Logged in user on Welcome Page can enter site
+    Given I am signed in
+  	  And I have navigated to the Welcome Page 
+  	When I click Enter
+    Then I should see the Lobby Page
     

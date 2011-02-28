@@ -1,0 +1,2 @@
+class LobbyPage < Page
+end
