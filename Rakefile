@@ -1,4 +1,8 @@
-task :default => ["cuke"]
+task :default => ["spec", "cuke"]
+
+task :spec do
+  sh "jruby -S rspec --color --format d spec/ruby/*"
+end
 
 task :cuke do
   
