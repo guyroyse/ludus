@@ -46,7 +46,7 @@ describe LoginUrlController do
     
   end
   
-  it 'passes request correct url data to LudusUrl' do
+  it 'passes request correct URL data to LudusUrl' do
 
     def LoginUrlController::url(requested_url, requested_path)
       requested_url.should == REQUESTED_URL
@@ -58,7 +58,7 @@ describe LoginUrlController do
         
   end
   
-  it 'passed correct url to OpenIdProviders' do
+  it 'passed correct URL to OpenIdProviders' do
     
     def LoginUrlController::providers(url)
       url.should == RETURN_URL
