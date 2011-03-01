@@ -1,8 +1,8 @@
 require 'json'
 require 'model'
 
-module LoginUrlController
-  def LoginUrlController.execute(requested_url, requested_path)
+class LoginUrlController
+  def execute(requested_url, requested_path)
     retval = []
     return_url = url(requested_url, requested_path)
     providers = providers(return_url.url) 

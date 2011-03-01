@@ -17,7 +17,7 @@ end
 
 get '/public/api/login-urls' do
   content_type "application/json"
-  LoginUrlController.execute request.url, request.path
+  LoginUrlController.new.execute request.url, request.path
 end
 
 get '/public/api/current-user' do
