@@ -3,44 +3,70 @@ $LOAD_PATH << 'src/ruby'
 require 'controllers'
 
 describe LoginUrlController do
+  
+  REQUESTED_URL = 'http://example.com/foo'
+  REQUESTED_PATH = '/foo'
+  RETURN_URL = 'http://example.com/bar'
+  PROVIDER_NAME = 'foo'
+  PROVIDER_IMAGE = 'bar.png'
+  PROVIDER_URL = 'http://example.com/baz'
+  
+  before do
+    
+    def LoginUrlController::url_double=(double)
+      @url_double = double
+    end
+    
+    def LoginUrlController::url(requested_url, requested_path)
+      @url_double
+    end
+    
+    def LoginUrlController::providers_double=(double)
+      @providers_double = double
+    end
+    
+    def LoginUrlController::providers(url)
+      @providers_double
+    end
+    
+    LoginUrlController::url_double = stub('url', :url => RETURN_URL)
+    
+    provider_stub = stub('provider', :to_hash => { :name => PROVIDER_NAME, :image => PROVIDER_IMAGE, :url => PROVIDER_URL });
+    providers_stub = stub('providers')
+    providers_stub.should_receive(:each).and_yield(provider_stub)
+    LoginUrlController::providers_double = providers_stub
+      
+  end
+  
   it 'returns JSON containing expected provider URLs' do
     
-    REQUESTED_URL = 'http://example.com/foo'
-    REQUESTED_PATH = '/foo'
-    RETURN_URL = 'http://example.com/bar'
-    PROVIDER_NAME = 'foo'
-    PROVIDER_IMAGE = 'bar.png'
-    PROVIDER_URL = 'http://example.com/baz'
-    
-    def LoginUrlController::mock_url=(mock)
-      @mock_url = mock
-    end
-    def LoginUrlController::url(requested_url, requested_path)
-      requested_url.should == REQUESTED_URL
-      requested_path.should == REQUESTED_PATH
-      @mock_url
-    end
-    
-    def LoginUrlController::mock_providers=(mock)
-      @mock_providers = mock
-    end
-    def LoginUrlController::providers(url)
-      url.should == RETURN_URL
-      @mock_providers
-    end
-    
-    mock_url = mock('url')
-    mock_url.should_receive(:url).once.and_return(RETURN_URL)
-    LoginUrlController::mock_url = mock_url
-    
-    mock_provider = mock('provider')
-    mock_provider.should_receive(:to_hash).once.and_return({ :name => PROVIDER_NAME, :image => PROVIDER_IMAGE, :url => PROVIDER_URL });
-    mock_providers = mock('providers')
-    mock_providers.should_receive(:each).once.and_yield(mock_provider)    
-    LoginUrlController::mock_providers = mock_providers
-      
     json = LoginUrlController.execute(REQUESTED_URL, REQUESTED_PATH)
     
     json.should == %Q/[{"name":"#{PROVIDER_NAME}","image":"#{PROVIDER_IMAGE}","url":"#{PROVIDER_URL}"}]/
+    
   end
+  
+  it 'passes request correct url data to LudusUrl' do
+
+    def LoginUrlController::url(requested_url, requested_path)
+      requested_url.should == REQUESTED_URL
+      requested_path.should == REQUESTED_PATH
+      @url_double
+    end
+    
+    LoginUrlController.execute REQUESTED_URL, REQUESTED_PATH
+        
+  end
+  
+  it 'passed correct url to OpenIdProviders' do
+    
+    def LoginUrlController::providers(url)
+      url.should == RETURN_URL
+      @providers_double
+    end
+    
+    LoginUrlController.execute REQUESTED_URL, REQUESTED_PATH
+    
+  end
+  
 end
