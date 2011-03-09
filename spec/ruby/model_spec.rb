@@ -4,7 +4,7 @@ require 'model'
 
 describe LudusUrl do
   
-  it 'returns the expect URL' do
+  it 'returns the expected URL' do
     LudusUrl.new(REQUESTED_URL, REQUESTED_PATH).url.should == RETURN_URL
   end
   
