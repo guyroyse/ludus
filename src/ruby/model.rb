@@ -20,13 +20,15 @@ class OpenIdProvider
   def initialize(name, image, openid_url, return_url)
     @name = name
     @image = image
-    @login_url = adapter.get_login_url(return_url, openid_url)
+    @openid_url = openid_url
+    @return_url = return_url
   end
   def adapter
     OpenIdUrlAdapter.new
   end
   def to_hash
-    { :name => @name, :image => @image, :url => @login_url } 
+    login_url = adapter.get_login_url(@return_url, @openid_url)
+    { :name => @name, :image => @image, :url => login_url } 
   end
 end
 
