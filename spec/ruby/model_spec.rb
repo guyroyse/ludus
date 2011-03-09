@@ -6,7 +6,6 @@ RETURN_URL = 'http://example.com/ludus.html'
   
 describe LudusUrl do
   
-  
   it 'returns the expect URL' do
     REQUESTED_URL = 'http://example.com/foo'
     REQUESTED_PATH = '/foo'
