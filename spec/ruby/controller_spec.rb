@@ -13,7 +13,7 @@ describe LoginUrlController do
   
   before do
     
-    @controller = LoginUrlController.new
+    @controller = LoginUrlController.new()
     
     def @controller.url_double=(double)
       @url_double = double
