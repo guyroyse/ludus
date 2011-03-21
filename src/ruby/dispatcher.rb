@@ -15,22 +15,30 @@ get '/_ah/login_required' do
   end
 end
 
-get '/public/api/login-urls' do
+def return_json
   content_type "application/json"
-  LoginController.new.login_urls request.url, request.path, '/ludus.html'
+  yield
+end
+
+get '/public/api/login-urls' do
+  return_json do
+    LoginController.new.login_urls request.url, request.path, '/ludus.html'
+  end
 end
 
 get '/api/logout-url' do
-  content_type "application/json"
-  LoginController.new.logout_url '/home.html'
+  return_json do
+    LoginController.new.logout_url '/home.html'
+  end
 end
 
 get '/public/api/current-user' do
-  user = LudusUserService.current_user
-  content_type "application/json"
-  if (user.nil?)
-    return { :loggedIn => false }.to_json
-  else
-    return { :loggedIn => true, :name => user.nickname }.to_json
+  return_json do
+    user = LudusUserService.current_user
+    if (user.nil?)
+      return { :loggedIn => false }.to_json
+    else
+      return { :loggedIn => true, :name => user.nickname }.to_json
+    end
   end
 end
