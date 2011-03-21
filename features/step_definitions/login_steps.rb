@@ -34,6 +34,10 @@ Then /^I should see the Welcome Back Panel$/ do
   @home.contains_text?('Welcome Back').should == true
 end
 
+Then /^I should see the nickname (.*) on the Welcome Page$/ do |nickname|
+  @home.contains_text?(nickname).should == true
+end
+
 Then /^I should see the Login Page/ do
   @login.contains_text?('Not logged in')
 end

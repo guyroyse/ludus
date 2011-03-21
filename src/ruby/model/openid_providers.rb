@@ -24,7 +24,7 @@ class OpenIdProvider
     @return_url = return_url
   end
   def to_hash
-    login_url = OpenIdUrlAdapter.new.get_login_url(@return_url, @openid_url)
+    login_url = LoginUrlAdapter.new.get_login_url(@return_url, @openid_url)
     { :name => @name, :image => @image, :url => login_url } 
   end
 end

@@ -17,7 +17,12 @@ end
 
 get '/public/api/login-urls' do
   content_type "application/json"
-  LoginUrlController.new.execute request.url, request.path
+  LoginController.new.login_urls request.url, request.path, '/ludus.html'
+end
+
+get '/api/logout-url' do
+  content_type "application/json"
+  LoginController.new.logout_url '/home.html'
 end
 
 get '/public/api/current-user' do
@@ -28,13 +33,4 @@ get '/public/api/current-user' do
   else
     return { :loggedIn => true, :name => user.nickname }.to_json
   end
-end
-
-get '/api/logout-url' do
-  content_type "application/json"
-  { :url => logout_url }.to_json
-end
-
-def logout_url
-  LudusUserService.create_logout_url '/home.html'
 end

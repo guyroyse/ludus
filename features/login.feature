@@ -25,6 +25,7 @@ Feature: Login
     Given I am signed in
   	  And I have navigated to the Welcome Page 
     Then I should see the Welcome Back Panel
+      And I should see the nickname test@hardboiledgeek.com on the Welcome Page
       
   Scenario: Logged in user on Welcome Page can sign out
     Given I am signed in
