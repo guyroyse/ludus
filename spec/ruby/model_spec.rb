@@ -13,7 +13,7 @@ describe LogoutUrl do
   it 'returns the expected URL' do
     adapter = stub('adapter')
     adapter.should_receive(:get_logout_url).with(HOME_URL).and_return(LOGOUT_URL)
-    LoginUrlAdapter.should_receive(:new).and_return(adapter)
+    UserServiceAdapter.should_receive(:new).and_return(adapter)
     LogoutUrl.new(HOME_URL).url.should == LOGOUT_URL
   end
 end
@@ -24,7 +24,7 @@ describe OpenIdProviders do
     
     adapter = stub('adapter')
     adapter.should_receive(:get_login_url).any_number_of_times.and_return(PROVIDER_URL)
-    LoginUrlAdapter.should_receive(:new).any_number_of_times.and_return(adapter)
+    UserServiceAdapter.should_receive(:new).any_number_of_times.and_return(adapter)
     
     expected_hashes = [ 
       {:name => 'Google', :image => 'google.png', :url => PROVIDER_URL}, 

@@ -2,7 +2,7 @@ require 'java'
 
 java_import com.hardboiledgeek.ludus.service.LudusUserService
 
-class LoginUrlAdapter
+class UserServiceAdapter
   def get_login_url(return_url, openid_url) 
     LudusUserService.create_login_url return_url, openid_url
   end
