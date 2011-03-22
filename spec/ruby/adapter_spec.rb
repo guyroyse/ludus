@@ -17,4 +17,10 @@ describe UserServiceAdapter do
     UserServiceAdapter.new.get_logout_url(HOME_URL).should == LOGOUT_URL
   end
   
+  it 'returns current user' do
+    user = stub('user')
+    LudusUserService.should_receive(:current_user).and_return(user)
+    UserServiceAdapter.new.get_current_user.should == user
+  end
+  
 end

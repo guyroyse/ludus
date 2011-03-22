@@ -9,4 +9,7 @@ class UserServiceAdapter
   def get_logout_url(destination_url)
     LudusUserService.create_logout_url destination_url
   end
+  def get_current_user
+    LudusUserService.current_user
+  end
 end
