@@ -45,3 +45,47 @@ describe OpenIdProviders do
   end
   
 end
+
+describe CurrentUser do
+
+  describe 'user is not logged in' do
+    
+    before(:each) do
+      adapter = stub('adapter')
+      adapter.should_receive(:get_current_user).and_return(nil)
+      UserServiceAdapter.should_receive(:new).and_return(adapter)
+      @user = CurrentUser.new
+    end
+    
+    it 'sets logged_in to false' do
+      @user.logged_in.should == false
+    end
+    
+    it 'sets nickname to nil' do
+      @user.nickname.should == nil
+    end
+  
+  end
+  
+  describe 'user is logged in' do
+    
+    before(:each) do
+      user = stub('user')
+      user.should_receive(:nickname).and_return(USER_NICKNAME)
+      adapter = stub('adapter')
+      adapter.should_receive(:get_current_user).and_return(user)
+      UserServiceAdapter.should_receive(:new).and_return(adapter)
+      @user = CurrentUser.new
+    end
+    
+    it 'sets logged_in to true' do
+      @user.logged_in.should == true
+    end
+    
+    it "sets nickname to current user's nickname" do
+      @user.nickname.should == USER_NICKNAME
+    end
+  
+  end
+  
+end
