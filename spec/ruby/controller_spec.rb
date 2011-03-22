@@ -30,3 +30,22 @@ describe LoginController do
   end
 
 end
+
+describe UserController do
+  
+  it 'returns a login status of false when user is not logged in' do
+    user = stub('user');
+    user.should_receive(:logged_in).at_least(:once).and_return(false)
+    CurrentUser.should_receive(:new).and_return(user)
+    UserController.new.current_user.should == '{"loggedIn":false}'
+  end
+  
+  it 'returns json containining a login status of true and the users nickname when user is logged in' do
+    user = stub('user');
+    user.should_receive(:logged_in).at_least(:once).and_return(true)
+    user.should_receive(:nickname).and_return(USER_NICKNAME)
+    CurrentUser.should_receive(:new).and_return(user)
+    UserController.new.current_user.should == %Q/{"loggedIn":true,"name":"#{USER_NICKNAME}"}/    
+  end
+  
+end

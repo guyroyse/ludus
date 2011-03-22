@@ -1,9 +1,6 @@
 require 'json'
 require 'model'
-require 'java'
  
-java_import com.hardboiledgeek.ludus.service.LudusUserService
-
 class LoginController
   def login_urls(requested_url, requested_path, destination_url)
     retval = []
@@ -17,5 +14,14 @@ class LoginController
   def logout_url(destination_url)
     url = LogoutUrl.new(destination_url).url
     { :url => url }.to_json
+  end
+end
+
+class UserController
+  def current_user 
+    user = CurrentUser.new
+    hash = { :loggedIn => user.logged_in }
+    hash[:name] = user.nickname if user.logged_in
+    hash.to_json
   end
 end
