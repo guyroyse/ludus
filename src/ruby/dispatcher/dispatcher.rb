@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'sinatra'
 require 'java'
-require 'json'
 require 'controllers'
 
 java_import com.hardboiledgeek.ludus.service.LudusUserService
@@ -24,12 +23,5 @@ get '/api/logout-url' do
 end
 
 get '/public/api/current-user' do
-  json_api do
-    user = LudusUserService.current_user
-    if (user.nil?)
-      return { :loggedIn => false }.to_json
-    else
-      return { :loggedIn => true, :name => user.nickname }.to_json
-    end
-  end
+  json_api { UserController.new.current_user }
 end
