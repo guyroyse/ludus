@@ -6,12 +6,7 @@ require 'controllers'
 java_import com.hardboiledgeek.ludus.service.LudusUserService
 
 get '/_ah/login_required' do
-  user = LudusUserService.current_user  
-  if user.nil?
-    redirect '/home.html'
-  else
-    redirect '/ludus.html'
-  end
+  redirect LoginController.new.login_required_redirect('/home.html', '/ludus.html')
 end
 
 get '/public/api/login-urls' do

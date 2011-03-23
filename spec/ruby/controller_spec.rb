@@ -28,23 +28,28 @@ describe LoginController do
     json.should == %Q/{"url":"#{LOGOUT_URL}"}/
     
   end
+  
+  it "redirects login required request to welcome page if user is not logged in" do
+    stub_logged_out_current_user
+    LoginController.new.login_required_redirect(HOME_URL, LOBBY_URL).should == HOME_URL
+  end
 
+  it "redirects login required request to lobby page if user is logged in" do
+    stub_logged_in_current_user
+    LoginController.new.login_required_redirect(HOME_URL, LOBBY_URL).should == LOBBY_URL    
+  end
+  
 end
 
 describe UserController do
   
   it 'returns a login status of false when user is not logged in' do
-    user = stub('user');
-    user.should_receive(:logged_in).at_least(:once).and_return(false)
-    CurrentUser.should_receive(:new).and_return(user)
+    stub_logged_out_current_user
     UserController.new.current_user.should == '{"loggedIn":false}'
   end
   
   it 'returns json containining a login status of true and the users nickname when user is logged in' do
-    user = stub('user');
-    user.should_receive(:logged_in).at_least(:once).and_return(true)
-    user.should_receive(:nickname).and_return(USER_NICKNAME)
-    CurrentUser.should_receive(:new).and_return(user)
+    stub_logged_in_current_user
     UserController.new.current_user.should == %Q/{"loggedIn":true,"name":"#{USER_NICKNAME}"}/    
   end
   

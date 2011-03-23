@@ -15,4 +15,11 @@ class LoginController
     url = LogoutUrl.new(destination_url).url
     { :url => url }.to_json
   end
+  def login_required_redirect(home_url, lobby_url)
+    if CurrentUser.new.logged_in
+      lobby_url
+    else
+      home_url
+    end 
+  end
 end
