@@ -1,7 +1,15 @@
 task :default => [:spec]
 
-desc "Runs specs against ruby code"
-task :spec => [:build] do
+desc "Runs specs against JavaScript & Ruby code"  
+task :spec => [:jasmine, :rspec]
+  
+desc "Runs specs against JavaScript code"
+task :jasmine => [:build] do
+  sh "node spec.js --color --verbose"
+end
+
+desc "Runs specs against Ruby code"
+task :rspec => [:build] do
   sh "jruby -J-classpath war/WEB-INF/classes:war/WEB-INF/lib/appengine-api-1.0-sdk-1.4.0.jar -S rspec --tty --color --format d spec/ruby/*"
 end
 
