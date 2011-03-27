@@ -2,7 +2,7 @@ task :default => [:spec]
 
 desc "Runs specs against ruby code"
 task :spec => [:build] do
-  sh "jruby -J-classpath war/WEB-INF/classes:war/WEB-INF/lib/appengine-api-1.0-sdk-1.4.0.jar -S rspec --color --format d spec/ruby/*"
+  sh "jruby -J-classpath war/WEB-INF/classes:war/WEB-INF/lib/appengine-api-1.0-sdk-1.4.0.jar -S rspec --tty --color --format d spec/ruby/*"
 end
 
 desc "Runs cukes against running application, start in another terminal with rake run"
