@@ -1,15 +1,21 @@
 task :default => [:spec]
 
-desc "Runs specs against ruby code"
-task :spec => [:build] do
-  sh "jruby -J-classpath war/WEB-INF/classes:war/WEB-INF/lib/appengine-api-1.0-sdk-1.4.0.jar -S rspec --color --format d spec/ruby/*"
+desc "Runs specs against JavaScript & Ruby code"  
+task :spec => [:jasmine, :rspec]
+  
+desc "Runs specs against JavaScript code"
+task :jasmine => [:build] do
+  sh "node spec.js"
+end
+
+desc "Runs specs against Ruby code"
+task :rspec => [:build] do
+  sh "jruby -J-classpath war/WEB-INF/classes:war/WEB-INF/lib/appengine-api-1.0-sdk-1.4.0.jar -S rspec --tty --color --format d spec/ruby/*"
 end
 
 desc "Runs cukes against running application, start in another terminal with rake run"
-task :cuke do  
-  sh "jruby -S cucumber features" do |ok, result|
-    puts "Cucumber failed. Status = #{result.exitstatus}" unless ok
-  end  
+task :cuke do
+  sh "jruby -S cucumber features"
 end
 
 desc "Does a clean and compile"
