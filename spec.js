@@ -1,4 +1,5 @@
-//require.paths.push("./lib");
+require.paths.push(__dirname + '/src/javascripts');
+
 var jasmine = require('jasmine-node');
 var sys = require('sys');
 
@@ -6,16 +7,8 @@ for(var key in jasmine) {
   global[key] = jasmine[key];
 }
 
-var isVerbose = false;
+var isVerbose = true;
 var showColors = true;
-process.argv.forEach(function(arg){
-  switch(arg) {
-  case '--color': showColors = true; break;
-  case '--noColor': showColors = false; break;
-  case '--verbose': isVerbose = true; break;
-  }
-});
-
 
 jasmine.executeSpecsInFolder(__dirname + '/spec/javascripts', function(runner, log){
   if (runner.results().failedCount == 0) {

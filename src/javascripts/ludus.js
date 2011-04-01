@@ -1,0 +1,1 @@
+var ludus_test = 42;

@@ -5,7 +5,7 @@ task :spec => [:jasmine, :rspec]
   
 desc "Runs specs against JavaScript code"
 task :jasmine => [:build] do
-  sh "node spec.js --color --verbose"
+  sh "node spec.js"
 end
 
 desc "Runs specs against Ruby code"
@@ -14,10 +14,8 @@ task :rspec => [:build] do
 end
 
 desc "Runs cukes against running application, start in another terminal with rake run"
-task :cuke do  
-  sh "jruby -S cucumber features" do |ok, result|
-    puts "Cucumber failed. Status = #{result.exitstatus}" unless ok
-  end  
+task :cuke do
+  sh "jruby -S cucumber features"
 end
 
 desc "Does a clean and compile"

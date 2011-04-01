@@ -3,3 +3,5 @@ $(function() {
 		$('#logout').attr('href', logoutData.url);
 	});
 });
+
+var ludus_test = 42;
